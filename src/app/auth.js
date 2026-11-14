@@ -151,7 +151,15 @@ const publicUser = (u) => {
   if (!u) return null;
   // eslint-disable-next-line no-unused-vars
   const { password, ...rest } = u;
-  return rest;
+  return {
+    ...rest,
+    name: String(rest.name || '').trim() || 'Farmer',
+    district: String(rest.district || '').trim(),
+    state: String(rest.state || '').trim(),
+    language: rest.language || 'English',
+    email: String(rest.email || '').trim(),
+    mobile: String(rest.mobile || '').trim(),
+  };
 };
 
 function readSession() {

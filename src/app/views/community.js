@@ -12,10 +12,17 @@ const seedPosts = () => [
 
 const load = () => {
   let p = community.get(null);
-  if (!p) {
+  if (!Array.isArray(p)) {
     p = seedPosts();
     community.set(p);
   }
+  p = p.map((post) => ({
+    ...post,
+    likes: Array.isArray(post.likes) ? post.likes : [],
+    comments: Array.isArray(post.comments) ? post.comments : [],
+    photo: post.photo || '',
+  }));
+  community.set(p);
   return p;
 };
 

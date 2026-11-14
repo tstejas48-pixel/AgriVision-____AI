@@ -64,7 +64,7 @@ export const homeView = {
       <a href="#/profile" class="avatar" aria-label="My profile">${esc(initials(u.name))}</a>
       <div class="home-greet">
         <small>${greeting(u)} 👋</small>
-        <h1>${esc(u.guest ? 'Hello, Farmer' : u.name.split(' ')[0])}</h1>
+        <h1>${esc(u.guest ? 'Hello, Farmer' : (String(u.name || '').trim().split(/\s+/)[0] || 'Farmer'))}</h1>
       </div>
       <a href="#/notifications" class="icon-btn bell" aria-label="Alerts${unread ? ', ' + unread + ' new' : ''}">${icon('bell', { size: 24 })}${unread ? `<span class="dot">${unread}</span>` : ''}</a>
     </header>

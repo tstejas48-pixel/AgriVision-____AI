@@ -29,7 +29,7 @@ export const profileView = {
       <div class="stat-row">
         <div><small>Crop checks</small><b>${scans}</b></div>
         <div><small>Saved results</small><b>${recs}</b></div>
-        <div><small>Language</small><b class="sm">${esc(u.language.split(' ')[0])}</b></div>
+        <div><small>Language</small><b class="sm">${esc(String(u.language || 'English').split(' ')[0])}</b></div>
       </div>
     </section>
 

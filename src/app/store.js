@@ -20,7 +20,10 @@ function uid() {
 export const store = {
   get(name, fallback) {
     const v = readAll(uid())[name];
-    return v === undefined ? fallback : v;
+    if (v === undefined || v === null) return fallback;
+    if (Array.isArray(fallback) && !Array.isArray(v)) return fallback;
+    if (fallback && typeof fallback === 'object' && !Array.isArray(fallback) && (typeof v !== 'object' || v === null || Array.isArray(v))) return fallback;
+    return v;
   },
   set(name, value) {
     const all = readAll(uid());
@@ -50,7 +53,10 @@ export const community = {
   get(fallback = null) {
     try {
       const v = JSON.parse(localStorage.getItem(COMMUNITY_KEY));
-      return v || fallback;
+      if (v === null || v === undefined) return fallback;
+      if (Array.isArray(fallback) && !Array.isArray(v)) return fallback;
+      if (fallback === null && !Array.isArray(v)) return fallback;
+      return v;
     } catch {
       return fallback;
     }
